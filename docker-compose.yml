@@ -1,0 +1,9 @@
+mongodb:
+  image: mongo:3.6.6-jessie
+  ports:
+    - '27017:27017'
+
+rediscache:
+  image: redis:5.0.2-stretch
+  ports:
+    - '6379:6379'
