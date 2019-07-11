@@ -10,7 +10,7 @@
       "cwd": "${workspaceFolder}",
       "name": "Start (NodeMON)",
       "runtimeExecutable": "npm",
-      "runtimeVersion": "10.15.3",
+      "runtimeVersion": "10.16.0",
       "runtimeArgs": ["run-script", "start-dev"],
       "port": 9229,
       "restart": true,
