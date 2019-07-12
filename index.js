@@ -1,4 +1,5 @@
 const debug = require('debug')('Pecron::/index');
+require('./src/modules/db.module');
 // Web server
 const express = require('express');
 const app = express();
@@ -6,7 +7,10 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 // Modules
 const fs = require('fs');
-
+// Routes
+const routes = {
+  user: require('./src/user/user.routes'),
+};
 const _configPath = './src/config/config.js';
 
 if (!fs.existsSync(_configPath)) {
@@ -15,8 +19,6 @@ if (!fs.existsSync(_configPath)) {
 }
 
 const _Config = require(_configPath);
-
-require('./src/modules/db.module');
 
 // Checkers
 const _envChecker = require('./tools/env-checker')();
@@ -34,6 +36,8 @@ app.use(
     allowedHeaders: ['Content-Type', 'Set-Cookie', 'Authorization'],
   }),
 );
+
+app.use('/user', routes.user);
 
 app.listen(_Config.webServer.port, _Config.webServer.origin, async () => {
   await _envChecker.noAdminUserAlready();
