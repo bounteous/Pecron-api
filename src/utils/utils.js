@@ -23,9 +23,33 @@ const __hashDbContent = _content => {
   }
 };
 
+const __unHashDbContent = _content => {
+  try {
+    return bcrypt.compareSync(_content.plain, _content.hash);
+  } catch (error) {
+    debug('Error into __unHashDbContent: %o', error);
+    return error;
+  }
+};
+
+const __resExpress = reply => {
+  let status = 200;
+
+  if (reply.errorCode) {
+    status = reply.errorCode;
+  }
+
+  return {
+    status: status,
+    body: reply,
+  };
+};
+
 module.exports = () => {
   return {
     randomString: __randomString,
     hashDbContent: __hashDbContent,
+    resExpress: __resExpress,
+    unHashDbContent: __unHashDbContent,
   };
 };
