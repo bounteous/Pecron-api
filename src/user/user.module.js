@@ -1,10 +1,12 @@
 const debug = require('debug')('Pecron::src/user/user.module');
 const _Config = require('../config/config');
 const pecronUtils = require('../utils/utils')();
+const pecronRedis = require('../modules/redis.module')();
 const mongoose = require('mongoose'),
   User = mongoose.model('User');
 
 const abstractCreateUserError = 'Error creating user';
+const abstractLoginUserError = 'Error login user';
 
 const __createDefaultAdmin = async () => {
   try {
@@ -61,8 +63,51 @@ const __findAdmin = async () => {
   }
 };
 
+const __login = async content => {
+  try {
+    const uSearch = await User.findOne({ email: content.email });
+    if (!uSearch)
+      return {
+        errorCode: 500,
+        error: new Error(abstractLoginUserError),
+        message: abstractCreateUserError,
+      };
+    const plainPasswd = pecronUtils.unHashDbContent({
+      plain: content.password,
+      hash: uSearch.password,
+    });
+
+    if (plainPasswd && plainPasswd instanceof Error) return plainPasswd;
+
+    if (!plainPasswd)
+      return {
+        errorCode: 500,
+        error: new Error(abstractLoginUserError),
+        message: abstractCreateUserError,
+      };
+
+    content.id = uSearch.id;
+    const token = await pecronRedis.redisJwtSign(content);
+    if (token && token instanceof Error)
+      return {
+        errorCode: 500,
+        error: token,
+        message: abstractLoginUserError,
+      };
+    return token;
+  } catch (error) {
+    debug('Error into __login: %o', error);
+    return {
+      errorCode: 500,
+      error: error,
+      message: abstractLoginUserError,
+    };
+  }
+};
+
 module.exports = () => {
   return {
     createDefaultAdmin: __createDefaultAdmin,
+    login: __login,
   };
 };
