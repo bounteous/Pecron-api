@@ -105,9 +105,23 @@ const __login = async content => {
   }
 };
 
+const __info = async userId => {
+  try {
+    return await User.findById(userId).select('-_id -password -disabled');
+  } catch (error) {
+    debug('Error into __info: %o', error);
+    return {
+      errorCode: 500,
+      error: error,
+      message: 'Error user info',
+    };
+  }
+};
+
 module.exports = () => {
   return {
     createDefaultAdmin: __createDefaultAdmin,
     login: __login,
+    info: __info,
   };
 };
