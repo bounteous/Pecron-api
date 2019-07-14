@@ -5,9 +5,14 @@ module.exports = {
   webServer: {
     origin: '0.0.0.0',
     port: 2424,
+    debugRequests: true,
   },
   mongo: {
-    uri: 'mongodb://localhost:27017/pecron',
+    db: 'pecron',
+    host: 'localhost',
+    port: '27017',
+    username: 'root',
+    password: 'changeme',
   },
   redis: {
     host: 'localhost',
@@ -24,6 +29,6 @@ module.exports = {
     secret: 'changeme',
     redisDb: 0,
     multiple: false,
-    ttl: '15 minutes'
+    ttl: '15 minutes',
   },
 };
