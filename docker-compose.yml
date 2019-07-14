@@ -1,9 +1,25 @@
-mongodb:
-  image: mongo:3.6.6-jessie
-  ports:
-    - '27017:27017'
+version: '3'
+services:
+  mongo:
+    image: mongo:3.6.6-jessie
+    ports:
+      - '27017:27017'
+    container_name: mongo-container
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_ROOT_PASSWORD}
+      - APP_MONGO_HOST=${MONGO_HOST}
+      - MONGO_PORT=${MONGO_PORT}
+      - MONGO_ROOT_USER=${MONGO_ROOT_USERNAME}
+      - MONGO_ROOT_PASS=${MONGO_ROOT_PASSWORD}
+      - APP_MONGO_USER=${APP_MONGO_USER}
+      - APP_MONGO_PASS=${APP_MONGO_PASS}
+      - APP_MONGO_DB=${APP_MONGO_DB}
+    volumes:
+      - ./data/db:/data/db
+      - './bin/mongo/:/docker-entrypoint-initdb.d/'
 
-rediscache:
-  image: redis:5.0.2-stretch
-  ports:
-    - '6379:6379'
+  # rediscache:
+  #   image: redis:5.0.2-stretch
+  #   ports:
+  #     - '6379:6379'
