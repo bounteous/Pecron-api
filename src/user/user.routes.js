@@ -1,21 +1,19 @@
 const debug = require('debug')('Pecron::src/user/user.routes');
 const pecronUtils = require('../utils/utils')();
 const pecronUserModule = require('./user.module')();
+const pecronMsgs = require('../config/messages');
 const mongoSanitize = require('mongo-sanitize');
 const express = require('express');
 const routes = express.Router();
 
-routes.post('/login', async (req, res) => {
+routes.get('/', async (req, res) => {
   try {
-    const content = {
-      email: mongoSanitize(req.body.email),
-      password: mongoSanitize(req.body.password),
-    };
-    if (!content.email || !content.password) {
+    const userId = mongoSanitize(req.userId);
+    if (!userId) {
       res.status(500);
-      return res.send('Email and password required');
+      return res.send(pecronMsgs.server.internalError);
     }
-    const rUser = await pecronUserModule.login(content);
+    const rUser = await pecronUserModule.info(userId);
     const { status, body } = pecronUtils.resExpress(rUser);
     res.status(status);
     res.send(body);
