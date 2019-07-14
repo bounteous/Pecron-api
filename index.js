@@ -9,7 +9,13 @@ const bodyParser = require('body-parser');
 const fs = require('fs');
 // Routes
 const routes = {
+  public: require('./src/public/public.routes'),
   user: require('./src/user/user.routes'),
+};
+// Middlewares
+const middlewares = {
+  requests: require('./src/middlewares/requests.module'),
+  jwt: require('./src/middlewares/jwt.module'),
 };
 const _configPath = './src/config/config.js';
 
@@ -37,6 +43,11 @@ app.use(
   }),
 );
 
+// Public
+app.use(middlewares.requests);
+app.use('/', routes.public);
+// Private
+app.use(middlewares.jwt);
 app.use('/user', routes.user);
 
 app.listen(_Config.webServer.port, _Config.webServer.origin, async () => {
