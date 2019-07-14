@@ -20,7 +20,7 @@ docker-compose up
 Read: https://github.com/nvm-sh/nvm/blob/master/README.md#installation-and-update
 
 ```shell
-nvm use nvm alias default v10.16.0
+nvm alias default v10.16.0
 ```
 
 ```shell
