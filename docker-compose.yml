@@ -19,7 +19,10 @@ services:
       - ./data/db:/data/db
       - './bin/mongo/:/docker-entrypoint-initdb.d/'
 
-  # rediscache:
-  #   image: redis:5.0.2-stretch
-  #   ports:
-  #     - '6379:6379'
+  rediscache:
+    image: redis:5.0.2-stretch
+    ports:
+      - '6379:6379'
+    volumes:
+      - ./data/redis:/data/redis
+    command: redis-server --requirepass ${REDIS_PASSWORD}
