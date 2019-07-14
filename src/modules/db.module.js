@@ -3,10 +3,16 @@ const _Config = require('../config/config');
 const mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 
-mongoose.connect(_Config.mongo.uri, { useNewUrlParser: true });
+const URI = `mongodb://${_Config.mongo.username}:${_Config.mongo.password}@${
+  _Config.mongo.host
+}:${_Config.mongo.port}/${_Config.mongo.db}`;
+
+mongoose.connect(URI, { useNewUrlParser: true });
 
 mongoose.connection.on('connected', () => {
-  console.info(`Mongoose default connection open to ${_Config.mongo.uri}`);
+  console.info(
+    `Mongoose default connection open to ${URI}`,
+  );
 });
 
 mongoose.connection.on('error', error => {
@@ -23,8 +29,8 @@ mongoose.set('useCreateIndex', true);
 mongoose.set('useFindAndModify', false);
 
 // If the Node process ends, close the Mongoose connection
-process.on('SIGINT', function() {
-  mongoose.connection.close(function() {
+process.on('SIGINT', () => {
+  mongoose.connection.close(() => {
     console.warn(
       'Mongoose default connection disconnected through app termination',
     );
