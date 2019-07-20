@@ -6,7 +6,7 @@ const mongoose = require('mongoose'),
   User = mongoose.model('User');
 
 const abstractCreateUserError = 'Error creating user';
-const abstractLoginUserError = 'Error login user';
+const abstractLoginUserError = 'Wrong user or password';
 
 const __createDefaultAdmin = async () => {
   try {
@@ -70,7 +70,7 @@ const __login = async content => {
       return {
         errorCode: 500,
         error: new Error(abstractLoginUserError),
-        message: abstractCreateUserError,
+        message: abstractLoginUserError,
       };
     const plainPasswd = pecronUtils.unHashDbContent({
       plain: content.password,
@@ -83,7 +83,7 @@ const __login = async content => {
       return {
         errorCode: 500,
         error: new Error(abstractLoginUserError),
-        message: abstractCreateUserError,
+        message: abstractLoginUserError,
       };
 
     content.id = uSearch.id;
@@ -94,7 +94,7 @@ const __login = async content => {
         error: token,
         message: abstractLoginUserError,
       };
-    return token;
+    return { token: token };
   } catch (error) {
     debug('Error into __login: %o', error);
     return {

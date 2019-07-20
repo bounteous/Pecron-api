@@ -4,8 +4,8 @@ const _RedisJwt = require('redis-jwt');
 const __instances = {
   jwt: new _RedisJwt({
     //host: '/tmp/redis.sock', //unix domain
-    host: _Config.redis.host, //can be IP or hostname
-    port: _Config.redis.port, // port
+    host: _Config.redis.host,
+    port: _Config.redis.port,
     maxretries: _Config.redis.maxretries, //reconnect retries, default 10
     auth: _Config.redis.auth, //optional password, if needed
     db: _Config.jwt.redisDb, //optional db selection

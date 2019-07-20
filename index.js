@@ -35,7 +35,7 @@ app.use(bodyParser.urlencoded({ limit: '5mb', extended: true }));
 
 app.use(
   cors({
-    origin: _Config.webServer.origin,
+    origin:'*',
     credentials: false,
     preflightContinue: true,
     exposedHeaders: ['Content-Type', 'Set-Cookie'],
