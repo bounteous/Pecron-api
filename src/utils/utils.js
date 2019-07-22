@@ -32,12 +32,23 @@ const __unHashDbContent = _content => {
   }
 };
 
+const __isJson = str => {
+  try {
+    JSON.parse(str);
+    return true;
+  } catch (error) {
+    return false;
+  }
+};
+
 const __resExpress = reply => {
   let status = 200;
 
   if (reply.errorCode) {
     status = reply.errorCode;
   }
+
+  if (!__isJson(reply)) reply = { message: reply };
 
   return {
     status: status,
