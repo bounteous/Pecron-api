@@ -7,6 +7,12 @@ module.exports = {
     port: 2424,
     debugRequests: true,
   },
+  security: {
+    password: {
+      minLength: 8,
+      maxLenth: 40,
+    },
+  },
   mongo: {
     db: 'pecron',
     host: 'localhost',
@@ -32,4 +38,5 @@ module.exports = {
     multiple: false,
     ttl: '15 minutes',
   },
+  mailing: {},
 };
