@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start-dev": "DEBUG=Pecron* nodemon --nolazy --inspect-brk=9229 index.js",
-    "change-password": "node tools/user/change-password.js"
+    "change-password": "node tools/user/change-password.js",
+    "create-user": "node tools/user/create.js"
   },
   "repository": {
     "type": "git",
