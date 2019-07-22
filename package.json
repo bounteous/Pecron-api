@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start-dev": "DEBUG=Pecron* nodemon --nolazy --inspect-brk=9229 index.js"
+    "start-dev": "DEBUG=Pecron* nodemon --nolazy --inspect-brk=9229 index.js",
+    "change-password": "node tools/user/change-password.js"
   },
   "repository": {
     "type": "git",
@@ -35,6 +36,7 @@
     "fs": "0.0.1-security",
     "mongo-sanitize": "^1.0.1",
     "mongoose": "^5.6.4",
+    "nodemailer": "^6.3.0",
     "randomstring": "^1.1.5",
     "redis-jwt": "^1.4.0"
   },
