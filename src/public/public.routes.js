@@ -6,8 +6,8 @@ const express = require('express');
 const routes = express.Router();
 
 routes.get('/', (req, res) => {
-  res.json(req.headers)
-})
+  res.json(req.headers);
+});
 
 routes.post('/login', async (req, res) => {
   try {

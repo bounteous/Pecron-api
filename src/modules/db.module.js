@@ -10,9 +10,7 @@ const URI = `mongodb://${_Config.mongo.username}:${_Config.mongo.password}@${
 mongoose.connect(URI, { useNewUrlParser: true });
 
 mongoose.connection.on('connected', () => {
-  console.info(
-    `Mongoose default connection open to ${URI}`,
-  );
+  console.info(`Mongoose default connection open to ${URI}`);
 });
 
 mongoose.connection.on('error', error => {
@@ -39,3 +37,4 @@ process.on('SIGINT', () => {
 });
 
 require('../user/user.schema');
+require('../customer/customer.schema');

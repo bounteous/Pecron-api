@@ -34,7 +34,7 @@ const __unHashDbContent = _content => {
 
 const __isJson = str => {
   try {
-    JSON.parse(str);
+    JSON.parse(JSON.stringify(str));
     return true;
   } catch (error) {
     return false;
