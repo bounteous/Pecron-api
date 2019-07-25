@@ -38,5 +38,12 @@ module.exports = {
     multiple: false,
     ttl: '15 minutes',
   },
+  sanitizers: {
+    lenghts: {
+      customer: {
+        name: 80,
+      },
+    },
+  },
   mailing: {},
 };
