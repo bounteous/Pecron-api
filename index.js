@@ -11,6 +11,7 @@ const fs = require('fs');
 const routes = {
   public: require('./src/public/public.routes'),
   user: require('./src/user/user.routes'),
+  customer: require('./src/customer/customer.routes'),
 };
 // Middlewares
 const middlewares = {
@@ -35,7 +36,7 @@ app.use(bodyParser.urlencoded({ limit: '5mb', extended: true }));
 
 app.use(
   cors({
-    origin:'*',
+    origin: '*',
     credentials: false,
     preflightContinue: true,
     exposedHeaders: ['Content-Type', 'Set-Cookie'],
@@ -49,6 +50,7 @@ app.use('/', routes.public);
 // Private
 app.use(middlewares.jwt);
 app.use('/user', routes.user);
+app.use('/customer', routes.customer);
 
 app.listen(_Config.webServer.port, _Config.webServer.origin, async () => {
   await _envChecker.noAdminUserAlready();
