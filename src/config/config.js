@@ -43,6 +43,12 @@ module.exports = {
       customer: {
         name: 80,
       },
+      'customer-host': {
+        name: 40,
+        description: 240,
+        ipv4: 15,
+        ipv6: 39,
+      },
     },
   },
   mailing: {},

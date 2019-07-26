@@ -12,6 +12,7 @@ const routes = {
   public: require('./src/public/public.routes'),
   user: require('./src/user/user.routes'),
   customer: require('./src/customer/customer.routes'),
+  'customer-host': require('./src/customer-host/customer-host.routes'),
 };
 // Middlewares
 const middlewares = {
@@ -51,6 +52,7 @@ app.use('/', routes.public);
 app.use(middlewares.jwt);
 app.use('/user', routes.user);
 app.use('/customer', routes.customer);
+app.use('/customer-host', routes['customer-host']);
 
 app.listen(_Config.webServer.port, _Config.webServer.origin, async () => {
   await _envChecker.noAdminUserAlready();

@@ -38,3 +38,4 @@ process.on('SIGINT', () => {
 
 require('../user/user.schema');
 require('../customer/customer.schema');
+require('../customer-host/customer-host.schema');
