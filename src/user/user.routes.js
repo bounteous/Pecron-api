@@ -18,7 +18,25 @@ routes.get('/', async (req, res) => {
     res.status(status);
     res.send(body);
   } catch (error) {
-    const _error = 'Error into GET /login';
+    const _error = 'Error into GET /';
+    debug(`${_error} -> %o`, error);
+    return _error;
+  }
+});
+
+routes.get('/list/customers', async (req, res) => {
+  try {
+    const userId = mongoSanitize(req.userId);
+    if (!userId) {
+      res.status(500);
+      return res.send(pecronMsgs.server.internalError);
+    }
+    const rUser = await pecronUserModule.listOwnCustomers(userId);
+    const { status, body } = pecronUtils.resExpress(rUser);
+    res.status(status);
+    res.send(body);
+  } catch (error) {
+    const _error = 'Error into GET /list/customers';
     debug(`${_error} -> %o`, error);
     return _error;
   }

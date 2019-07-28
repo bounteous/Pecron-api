@@ -3,6 +3,7 @@ const _Config = require('../config/config');
 const pecronUtils = require('../utils/utils')();
 const pecronRedis = require('../modules/redis.module')();
 const mongoose = require('mongoose'),
+  Customer = mongoose.model('Customer'),
   User = mongoose.model('User');
 
 const abstractCreateUserError = 'Error creating user';
@@ -118,10 +119,33 @@ const __info = async userId => {
   }
 };
 
+const __listOwnCustomers = async user => {
+  try {
+    return await Customer.find({
+      alloweds: user,
+    })
+      .populate({
+        path: 'hosts',
+      })
+      .populate({
+        path: 'alloweds',
+        select: '-password',
+      });
+  } catch (error) {
+    debug('Error into __listOwnCustomers: %o', error);
+    return {
+      errorCode: 500,
+      error: error,
+      message: 'Error list user customers',
+    };
+  }
+};
+
 module.exports = () => {
   return {
     createDefaultAdmin: __createDefaultAdmin,
     login: __login,
     info: __info,
+    listOwnCustomers: __listOwnCustomers,
   };
 };

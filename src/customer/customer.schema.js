@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 const Customer = new mongoose.Schema(
   {
     name: { type: String, max: _Config.sanitizers.lenghts.customer.name },
-    hosts: [{ type: Schema.Types.ObjectId, ref: 'Host' }],
+    hosts: [{ type: Schema.Types.ObjectId, ref: 'CustomerHost' }],
     disabled: { type: Boolean, default: false },
     alloweds: [{ type: Schema.Types.ObjectId, ref: 'User' }],
     created: {
