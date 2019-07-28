@@ -4,10 +4,10 @@ This is a pentesting platform in the cloud, which will allow to systematically p
 
 ## Requirements
 
-* OS == GNU/Linux || macOS || Windows
-* Docker Compose >= 1.24
-* Node.js == 10.16
-* VScode >= 1.35 (__Recommended__)
+- OS == GNU/Linux || macOS || Windows
+- Docker Compose >= 1.24
+- Node.js == 10.16
+- VScode >= 1.35 (**Recommended**)
 
 ## Development setup
 
@@ -29,4 +29,14 @@ npm install
 
 ```shell
 npm run start-dev
+```
+
+## Tools
+
+```shell
+bin/user/create.sh
+```
+
+```shell
+bin/user/change-password.sh
 ```
