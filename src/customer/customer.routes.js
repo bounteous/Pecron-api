@@ -33,4 +33,19 @@ routes.post('/', async (req, res) => {
   }
 });
 
+routes.get('/:customer/list/hosts', async (req, res) => {
+  try {
+    const rCustomerHosts = await pecronCustomerModule.listHosts(
+      mongoSanitize(req.params.customer),
+    );
+    const { status, body } = pecronUtils.resExpress(rCustomerHosts);
+    res.status(status);
+    return res.send(body);
+  } catch (error) {
+    const _error = 'Error into GET /:customer/list/hosts';
+    debug(`${_error} -> %o`, error);
+    return _error;
+  }
+});
+
 module.exports = routes;
