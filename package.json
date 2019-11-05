@@ -38,7 +38,7 @@
     "fs": "0.0.1-security",
     "mocha": "^6.2.0",
     "mongo-sanitize": "^1.0.1",
-    "mongoose": "^5.6.4",
+    "mongoose": "^5.7.5",
     "nodemailer": "^6.3.0",
     "randomstring": "^1.1.5",
     "redis-jwt": "^1.4.0"
