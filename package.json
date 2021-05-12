@@ -39,7 +39,7 @@
     "mocha": "^6.2.0",
     "mongo-sanitize": "^1.0.1",
     "mongoose": "^5.6.4",
-    "nodemailer": "^6.3.0",
+    "nodemailer": "^6.4.16",
     "randomstring": "^1.1.5",
     "redis-jwt": "^1.4.0"
   },
